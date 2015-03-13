@@ -11,10 +11,15 @@ var responseTemp = function(response, head, file) {
 };
 
 function start() {
-  var host = conf.serv['localhost'];
 
+  if(!conf.app.conf_fin) console.log('running without user config, start demo task');
+
+  var host = conf.constant.host;
   function onRequest(request, response) {
     if(request.url === '/favicon.ico') return;
+    for(var key in conf.serv) {
+      if(request.headers.host.indexOf(key) !== -1) host = conf.serv[key];
+    }
     var nowTemp = host.workspace + request.url.pathname;
     var httpHead = header(nowTemp);
 
@@ -48,7 +53,7 @@ function start() {
       }
     };
 
-    route(conf.app, request, send);
+    route(conf.app.url, request, send);
   }
 
   http.createServer(onRequest).listen(conf.constant.port);
@@ -59,6 +64,7 @@ function config(data) {
 
   if(data && data.url){
     conf.app = data;
+    conf.app.conf_fin = true;
   } else {
     throw 'APP CONFIG ERROR!';
   }

@@ -8,7 +8,11 @@ function app() {
 exports.app = app();
 
 exports.constant = {
-  port: 9999
+  port: 9999,
+  host: {
+    workspace: '__dirname/default',
+    baseTemp: 'welcome.html'
+  }
 };
 
 exports.serv = {

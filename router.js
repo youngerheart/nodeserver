@@ -11,7 +11,7 @@ function getMethod(app, url) {
       if(url) {
         arg = arg.concat(url.split('/'));
       }
-      res.data = app.get[key].apply(this, arg);
+      app.get[key].apply(this, arg);
       return;
     }
   }
