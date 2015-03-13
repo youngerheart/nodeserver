@@ -20,7 +20,7 @@ function start() {
     for(var key in conf.serv) {
       if(request.headers.host.indexOf(key) !== -1) host = conf.serv[key];
     }
-    var nowTemp = host.workspace + request.url.pathname;
+    var nowTemp = host.workspace + (request.url.pathname || host.baseTemp);
     var httpHead = header(nowTemp);
 
     // 直接定向到模板
