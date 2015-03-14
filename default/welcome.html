@@ -40,8 +40,12 @@
     });
     $('#postbtn').on('click', function() {
       $.ajax({
-        method: 'get',
-        url: '/api',
+        method: 'post',
+        url: '/api/param1/param2?key=value',
+        data: {
+          author: 'younger',
+          object: 'nodeserver'
+        },
         success: function(data) {
           show(data);
         }

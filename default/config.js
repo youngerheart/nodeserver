@@ -9,7 +9,14 @@ var list = {
     };
     return send(res);
   },
-  post: function(send, res) {
+  post: function(send, res, routeParams, getParams, formData) {
+    res.status = 200;
+    res.data = {
+      message: 'yes! this is a response data with post method',
+      routeParams: routeParams,
+      getParams: getParams,
+      formData: formData
+    };
     return send(res);
   },
   put: function(send, res) {
