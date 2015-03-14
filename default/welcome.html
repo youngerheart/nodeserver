@@ -1,8 +1,52 @@
 <html>
-<head>
-  <title>nodeserver</title>
-</head>
-<body>
-<h2>welcome to nodeserver!</h2>
-</body>
+  <head>
+    <title>nodeserver</title>
+  </head>
+  <body>
+  <h2>welcome to nodeserver!</h2>
+  <h3>you can send messange by those method</h3>
+  <p>
+    <button id="getbtn">get</button>
+  </p>
+  <p>
+    <button id="postbtn">post</button>
+  </p>
+  <p>
+    <button id="putbtn">put</button>
+  </p>
+  <p>
+    <button id="deletebtn">delete</button>
+  </p>
+  <h3>your request's response will display in there.</h3>
+  <div id="message">no message</div>
+  <h3>the route config file is config.js</h3>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript">
+    function show(data) {
+      $('#message').html(JSON.stringify(data));
+    }
+    $('#getbtn').on('click', function() {
+      $.ajax({
+        method: 'get',
+        url: '/api/param1/param2',
+        data: {
+          author: 'younger',
+          object: 'nodeserver'
+        },
+        success: function(data) {
+          show(data);
+        }
+      })
+    });
+    $('#postbtn').on('click', function() {
+      $.ajax({
+        method: 'get',
+        url: '/api',
+        success: function(data) {
+          show(data);
+        }
+      })
+    });
+  </script>
+  </body>
 </html>

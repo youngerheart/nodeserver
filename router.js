@@ -7,10 +7,20 @@ function getMethod(app, url) {
   // get
   for(var key in app.get) {
     if(url.indexOf(key) !== -1) {
-      url = url.replace(key + '/', '');
-      if(url) {
-        arg = arg.concat(url.split('/'));
+      url = url.replace(key, '').split('?');
+      // 解析之后的url参数
+      arg[2] = url[0] ? url[0].replace('/', '').split('/') : null;
+      // 继续解析带问号的部分,并使用一个对象返回
+      if(url[1] && url[1].length) {
+        var param = url[1].split('&');
+        var paramObj = {};
+        var parse = [];
+        for(var i = 0; i < param.length; i ++) {
+          parse = param[i].split('=');
+          paramObj[parse[0]] = parse[1];
+        }
       }
+      arg[3] = paramObj;
       app.get[key].apply(this, arg);
       return;
     }
@@ -35,7 +45,7 @@ function response(app, request, send) {
       getMethod(app, url);
       break;
     case 'POST':
-      postMethod(app, url);
+      postMethod(app, url, request);
       break;
     default:
       getMethod(app, url);

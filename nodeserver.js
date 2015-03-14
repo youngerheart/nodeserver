@@ -4,15 +4,19 @@ var header = require('./tool/httpHeader').contentType;
 var route = require('./router').response;
 var conf = require('./config');
 
-var responseTemp = function(response, head, file) {
+function responseTemp(response, head, file) {
   response.writeHead(200, head);
   response.write(file, 'binary');
   response.end();
 };
 
-function start() {
+function error(response, head) {
+  response.writeHead(500, head);
+  response.write('<h2>Server Error</h2><p>Error in api or template config about this domain</p>');
+  response.end();
+}
 
-  if(!conf.app.conf_fin) console.log('running without user config, start demo task');
+function start() {
 
   var host = conf.constant.host;
   function onRequest(request, response) {
@@ -20,12 +24,24 @@ function start() {
     for(var key in conf.serv) {
       if(request.headers.host.indexOf(key) !== -1) host = conf.serv[key];
     }
-    var nowTemp = host.workspace + (request.url.pathname || host.baseTemp);
+
+    if(!host) {
+      error(response, httpHead);
+      return;
+    }
+
+    var nowTemp = host.workspace + (request.url.replace('/', '') || host.baseTemp);
     var httpHead = header(nowTemp);
+    
+    conf.app = conf.getApp(host.workspace);
 
     // 直接定向到模板
     var defaultTemp = function() {
       fs.readFile(host.workspace + host.baseTemp, 'binary', function(err, file) {
+        if(err) {
+          error(response, httpHead);
+          return;
+        }
         responseTemp(response, httpHead, file);
       });
     };
@@ -60,15 +76,4 @@ function start() {
   console.log('server running at ' + conf.constant.port);
 }
 
-function config(data) {
-
-  if(data && data.url){
-    conf.app = data;
-    conf.app.conf_fin = true;
-  } else {
-    throw 'APP CONFIG ERROR!';
-  }
-}
-
 exports.start = start;
-exports.config = config;

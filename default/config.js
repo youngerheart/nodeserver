@@ -1,6 +1,12 @@
 
 var list = {
-  get: function(send, res) {
+  get: function(send, res, routeParams, getParams) {
+    res.status = 200;
+    res.data = {
+      message: 'yes! this is a response data with get method',
+      routeParams: routeParams,
+      getParams: getParams
+    };
     return send(res);
   },
   post: function(send, res) {
