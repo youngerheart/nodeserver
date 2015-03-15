@@ -19,10 +19,24 @@ var list = {
     };
     return send(res);
   },
-  put: function(send, res) {
+  put: function(send, res, routeParams, getParams, formData) {
+    res.status = 200;
+    res.data = {
+      message: 'yes! this is a response data with put method',
+      routeParams: routeParams,
+      getParams: getParams,
+      formData: formData
+    };
     return send(res);
   },
-  delete: function(send, res) {
+  delete: function(send, res, routeParams, getParams, formData) {
+    res.status = 200;
+    res.data = {
+      message: 'yes! this is a response data with delete method',
+      routeParams: routeParams,
+      getParams: getParams,
+      formData: formData
+    };
     return send(res);
   }
 };

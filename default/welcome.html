@@ -51,6 +51,32 @@
         }
       })
     });
+    $('#putbtn').on('click', function() {
+      $.ajax({
+        method: 'put',
+        url: '/api/param1/param2?key=value',
+        data: {
+          author: 'younger',
+          object: 'nodeserver'
+        },
+        success: function(data) {
+          show(data);
+        }
+      })
+    });
+    $('#deletebtn').on('click', function() {
+      $.ajax({
+        method: 'delete',
+        url: '/api/param1/param2?key=value',
+        data: {
+          author: 'younger',
+          object: 'nodeserver'
+        },
+        success: function(data) {
+          show(data);
+        }
+      })
+    });
   </script>
   </body>
 </html>

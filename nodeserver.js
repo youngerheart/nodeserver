@@ -10,9 +10,9 @@ function responseTemp(response, head, file) {
   response.end();
 };
 
-function error(response, head) {
+function error(response, head, text) {
   response.writeHead(500, head);
-  response.write('<h2>Server Error</h2><p>Error in api or template config about this domain</p>');
+  response.write('<h2>Server Error</h2><p>Error in api or template config about this domain</p><p>' + (text || 'Can\'t find domain config!') + '</p>');
   response.end();
 }
 
@@ -48,6 +48,10 @@ function start() {
 
     var send = function(res) {
       if(res) {
+        if(res === 'error') {
+          error(response, {'Content-Type': 'text/plain'}, 'Route config error!');
+          return;
+        }
         // json格式
         response.writeHead(res.status, {'Content-Type': 'application/json'});
         response.write(JSON.stringify(res));

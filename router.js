@@ -2,7 +2,7 @@ var querystring = require('querystring');
 
 var url = null,
   arg = [], 
-  postData = null,
+  nowaData = null,
   res = {status: 404, data: 'api not found'};
 
 function defaultMethod(arg, url) {
@@ -23,28 +23,20 @@ function defaultMethod(arg, url) {
   return arg;
 }
 
-function getMethod(app, url) {
-  // get
+function dealArg(app, url, method, data) {
+
   for(var key in app.get) {
     if(url.indexOf(key) !== -1) {
       url = url.replace(key, '').split('?');
       arg = defaultMethod(arg, url);
-      app.get[key].apply(this, arg);
-      return;
-    }
-  }
-  // 尝试获取静态文件
-  arg[0]();
-}
-
-function postMethod(app, url, data) {
-  // post
-  for(var key in app.post) {
-    if(url.indexOf(key) !== -1) {
-      url = url.replace(key, '').split('?');
-      arg = defaultMethod(arg, url);
-      arg[4] = data;
-      app.post[key].apply(this, arg);
+      if(data) arg[4] = data;
+      
+      if(!(app[method] && app[method][key])) {
+        // 报错
+        arg[0]('error');
+        return;
+      }
+      app[method][key].apply(this, arg);
       return;
     }
   }
@@ -56,21 +48,32 @@ function response(app, request, send) {
   url = request.url;
   // 每个方法中的第一个参数为返回数据的调用函数，第一个为需要返回的数据信息
   arg = [send, res];
-  postData = '';
+  nowaData = '';
+
+  function dealTask(method) {
+    request.addListener('data', function(chunk) {
+      nowaData += chunk;
+    });
+    request.addListener('end', function () {
+      dealArg(app, url, method, querystring.parse(nowaData));
+    });
+  }
+
   switch(request.method) {
     case 'GET':
-      getMethod(app, url);
+      dealArg(app, url, 'get');
       break;
     case 'POST':
-      request.addListener('data', function(chunk) {
-        postData += chunk;
-      });
-      request.addListener('end', function () {
-        postMethod(app, url, querystring.parse(postData));
-      });
+      dealTask('post');
+      break;
+    case 'PUT':
+      dealTask('put');
+      break;
+    case 'DELETE':
+      dealTask('delete');
       break;
     default:
-      getMethod(app, url);
+      dealArg(app, url, 'get');
   }
 }
 
