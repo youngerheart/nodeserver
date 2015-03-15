@@ -21,7 +21,7 @@ $ git clone git@github.com:youngerheart/nodeserver.git
 
 ### 2. 配置：
 
-1. 在全局安装之后，可以在本目录配置服务器，具体方法为:
+在全局安装之后，可以在本目录配置服务器，具体方法为:
 
 ```php
 // 对服务器常量进行配置
@@ -47,7 +47,7 @@ exports.serv = {
 };
 ```
 
-2. 在站点根目录 (之前定义的workspace) 中新建 config.js 文件，在其中写入站点路由信息
+在站点根目录 (之前定义的workspace) 中新建 config.js 文件，在其中写入站点路由信息
 
 ```php
 // project_url/config.js
