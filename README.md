@@ -7,12 +7,6 @@ Achieve node server's domain name resolution and web application's router
 
 2.对 get， post， put， delete 方法可以正确响应，并提交给站点后端处理方法在路径中的参数，与get，form data方式传递的参数
 
-
-2. 在每个站点的根目录中新建config
-
-
-基本功能完成后将进行更新
-
 ## 一、安装与运行
 
 ### 0. 全局模块
@@ -29,6 +23,7 @@ $ git clone git@github.com:youngerheart/nodeserver.git
 1. 在全局安装之后，可以在本目录配置服务器，具体方法为:
 ```php
 // 对服务器常量进行配置
+// config.js
 exports.constant = {
   // 默认端口
   port: 9999,
@@ -53,6 +48,7 @@ exports.serv = {
 2. 在站点根目录 (之前定义的workspace) 中新建 config.js 文件，在其中写入站点路由信息
 
 ```php
+// project_url/config.js
 // 定义某个接口的url，所有的get接口放在app.url.get中，其中key为路由url，value为要触发的函数，类似的定义post, put, delete中的路由
 exports.app = {
   url: {
@@ -71,13 +67,18 @@ exports.app = {
   }
 }
 ```
+3.run
 
+```php
+// 安装目录
+node index.js
+```
 
-## 二、基本用法
+## 二、还有想说的
 
-请先参考 `config.js` 域名解析示例配置 与 `default/config.js` web 路由示例配置
+欢迎页中有 get， post， put， delete 接口的定义方法示例，可以参考
 
-基本功能完成后将进行更新
+会不断优化与更新代码。
 
 ## 三、基本目录文件结构
 
