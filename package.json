@@ -1,0 +1,24 @@
+{
+  "name": "node-server",
+  "version": "0.0.0",
+  "description": "Achieve node server's domain name resolution and web application's router",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/youngerheart/nodeserver.git"
+  },
+  "keywords": [
+    "node",
+    "restapi",
+    "router"
+  ],
+  "author": "youngerheart <435495400@qq.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/youngerheart/nodeserver/issues"
+  },
+  "homepage": "https://github.com/youngerheart/nodeserver"
+}
