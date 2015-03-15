@@ -93,6 +93,7 @@ node index.js
 ├── tool                ... 自制的一些需要到的小工具
 └── default             ... 一个在找不到初始化配置时的默认页面
     ├── config.js       ... web 路由示例配置
+    ├── demo.html       ... 路由测试页面
     └── welcome.html    ... 欢迎页面，其中有各种功能演示
 
 
