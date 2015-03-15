@@ -29,7 +29,7 @@ var list = {
     };
     return send(res);
   },
-  delete: function(send, res, routeParams, getParams, formData) {
+  remove: function(send, res, routeParams, getParams, formData) {
     res.status = 200;
     res.data = {
       message: 'yes! this is a response data with delete method',
