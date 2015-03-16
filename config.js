@@ -8,14 +8,16 @@ exports.getApp = function(route) {
 exports.constant = {
   port: 9999,
   host: {
-    workspace: __dirname + '/default/',
+    backend: __dirname + '/default/',
+    frondend: __dirname + '/default/',
     baseTemp: 'welcome.html'
   }
 };
 
 exports.serv = {
-  'localhost1': {
-    workspace: '/Users/pg/demo/nodeserver/default/',
-    baseTemp: 'demo.html'
+  'localhost': {
+    backend: '/Users/pg/demo/ngblog/api/',
+    frondend: '/Users/pg/demo/ngblog/web/',
+    baseTemp: 'system/html/layout/layout.html'
   }
 };

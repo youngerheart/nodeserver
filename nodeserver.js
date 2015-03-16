@@ -6,12 +6,12 @@ var conf = require('./config');
 
 function responseTemp(response, head, file) {
   response.writeHead(200, head);
-  response.write(file, 'binary');
+  response.write(file);
   response.end();
 };
 
-function error(response, head, text) {
-  response.writeHead(500, head);
+function error(response, text) {
+  response.writeHead(500, {'Content-Type': 'text/html'});
   response.write('<h2>Server Error</h2><p>Error in api or template config about this domain</p><p>' + (text || 'Can\'t find domain config!') + '</p>');
   response.end();
 }
@@ -19,27 +19,31 @@ function error(response, head, text) {
 function start() {
 
   var host = conf.constant.host;
+
   function onRequest(request, response) {
+    var frontUrl = '';
     if(request.url === '/favicon.ico') return;
     for(var key in conf.serv) {
-      if(request.headers.host.indexOf(key) !== -1) host = conf.serv[key];
+      if(request.headers.host.indexOf(key) !== -1) {
+        host = conf.serv[key];
+      }
     }
+    
+    var nowTemp = host.frondend + (request.url.replace('/', '') || host.baseTemp);
+    var httpHead = header(nowTemp);
 
+    conf.app = conf.getApp(host.backend);
+    
     if(!host) {
-      error(response, httpHead);
+      error(response);
       return;
     }
 
-    var nowTemp = host.workspace + (request.url.replace('/', '') || host.baseTemp);
-    var httpHead = header(nowTemp);
-    
-    conf.app = conf.getApp(host.workspace);
-
     // 直接定向到模板
     var defaultTemp = function() {
-      fs.readFile(host.workspace + host.baseTemp, 'binary', function(err, file) {
+      fs.readFile(host.frondend + host.baseTemp, 'binary', function(err, file) {
         if(err) {
-          error(response, httpHead);
+          error(response);
           return;
         }
         responseTemp(response, httpHead, file);
@@ -49,7 +53,7 @@ function start() {
     var send = function(res) {
       if(res) {
         if(res === 'error') {
-          error(response, {'Content-Type': 'text/plain'}, 'Route config error!');
+          error(response, 'Route config error!');
           return;
         }
         // json格式

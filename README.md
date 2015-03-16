@@ -31,7 +31,8 @@ exports.constant = {
   port: 9999,
   // welcome page's configure
   host: {
-    workspace: __dirname + '/default/',
+    backend: __dirname + '/default/',
+    frondend: __dirname + '/default/',
     baseTemp: 'welcome.html'
   }
 };
@@ -40,7 +41,9 @@ exports.serv = {
   // sites' domain name
   'localhost1': {
     // sites' backend workspace
-    workspace: '/Users/pg/demo/nodeserver/default/',
+    backend: '/Users/pg/demo/nodeserver/default/',
+    // sites' frondend workspace
+    frondend: '/Users/pg/demo/nodeserver/default/',
     // sites' static file entrance
     baseTemp: 'demo.html'
   }
