@@ -16,7 +16,7 @@ make sure you have global installed node.
 ### 1. Initialization
 
 ```php
-$ git clone git@github.com:youngerheart/nodeserver.git
+$ sudo npm install -g web-node-server
 ```
 
 ### 2. Configure

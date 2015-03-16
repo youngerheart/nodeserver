@@ -1,10 +1,10 @@
 {
   "name": "web-node-server",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "description": "Achieve node server's domain name resolution and web application's router",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "test": "sudo npm install -g web-node-server"
   },
   "repository": {
     "type": "git",
