@@ -88,15 +88,15 @@ If any changes please update this section
 
 ```php
 .
-├── config.js           ... 域名解析示例配置
-├── index.js            ... 示例启动代码
-├── nodeserver.js       ... 定义response回调，并启动服务
-├── router.js           ... 区分不同的请求，做出不同的处理
-├── tool                ... 自制的一些需要到的小工具
-└── default             ... 一个在找不到初始化配置时的默认页面
-    ├── config.js       ... web 路由示例配置
-    ├── demo.html       ... 路由测试页面
-    └── welcome.html    ... 欢迎页面，其中有各种功能演示
+├── config.js           ... server's domain example configure
+├── index.js            ... example startup code
+├── nodeserver.js       ... define response callback，than start server
+├── router.js           ... distinguish different request， make different treatment
+├── tool                ... gadgets
+└── default             ... default welcome page
+    ├── config.js       ... example route configure
+    ├── demo.html       ... demo page about a demo configure
+    └── welcome.html    ... welcome page，the function demonstration
 
 
 ```
