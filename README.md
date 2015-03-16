@@ -1,57 +1,57 @@
 # nodeserver
 Achieve node server's domain name resolution and web application's router
 
-## 零、实现了什么
+## Zero、What is realized
 
-1.这是一个简单的 node http 服务器，实现了服务器对域名的映射，以及每一个站点后端静态文件与API路径的映射
+1.This is a simple node http server，achieve a mapping for server and domain name，than a mapping for the static file and API route
 
-2.对 get， post， put， delete 方法可以正确响应，并提交给站点后端处理方法在路径中的参数，与get，form data方式传递的参数
+2.right response for get， post， put， delete method，than submit the params in route query string and form data to your node backend.
 
-## 一、安装与运行
+## First、Setup and run
 
-### 0. 全局模块
+### 0. Global module
 
-请确保已经全局安装了 node 
+make sure you have global installed node.
 
-### 1. 初始化：
+### 1. Initialization
 
 ```php
 $ git clone git@github.com:youngerheart/nodeserver.git
 ```
 
-### 2. 配置：
+### 2. Configure
 
-在全局安装之后，可以在本目录配置服务器，具体方法为:
+You should configure server in this directory, specific method is:
 
 ```php
-// 对服务器常量进行配置
+// configure server constant
 // config.js
 exports.constant = {
-  // 默认端口
+  // default port
   port: 9999,
-  // 欢迎页配置，无需修改
+  // welcome page's configure
   host: {
     workspace: __dirname + '/default/',
     baseTemp: 'welcome.html'
   }
 };
-// 对服务器域名进行绑定
+// Binding to the domain name
 exports.serv = {
-  // 站点域名
+  // sites' domain name
   'localhost1': {
-    // 站点后端根目录
+    // sites' backend workspace
     workspace: '/Users/pg/demo/nodeserver/default/',
-    // 站点静态文件入口
+    // sites' static file entrance
     baseTemp: 'demo.html'
   }
 };
 ```
 
-在站点根目录 (之前定义的workspace) 中新建 config.js 文件，在其中写入站点路由信息
+At backend workspace (Ppreviously defined workspace) create config.js. Write the site routing information
 
 ```php
 // project_url/config.js
-// 定义某个接口的url，所有的get接口放在app.url.get中，其中key为路由url，value为要触发的函数，类似的定义post, put, delete中的路由
+// Define a API's url，all get method's API are in app.url.get object，the key is route url，value is a function which will be running. Than define post, put, delete route.
 exports.app = {
   url: {
     'get': {
@@ -72,19 +72,19 @@ exports.app = {
 3.run
 
 ```php
-// 安装目录
+// In this directory
 node index.js
 ```
 
-## 二、还有想说的
+## Second、Learn more
 
-欢迎页中有 get， post， put， delete 接口的定义方法示例，可以参考
+There are some example in welcome page about get， post， put， delete method's using. You can reference
 
-会不断优化与更新代码。
+you can give me your suggestion in github.
 
-## 三、基本目录文件结构
+## Third、The basic file directory structure
 
-若有变化请更新本段
+If any changes please update this section
 
 ```php
 .

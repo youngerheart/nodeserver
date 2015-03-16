@@ -1,5 +1,5 @@
 {
-  "name": "node-server",
+  "name": "web-node-server",
   "version": "0.0.0",
   "description": "Achieve node server's domain name resolution and web application's router",
   "main": "index.js",
@@ -13,6 +13,7 @@
   "keywords": [
     "node",
     "restapi",
+    "domain",
     "router"
   ],
   "author": "youngerheart <435495400@qq.com>",
