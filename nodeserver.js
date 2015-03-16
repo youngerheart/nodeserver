@@ -11,7 +11,7 @@ function responseTemp(response, head, file) {
 };
 
 function error(response, text) {
-  response.writeHead(500, {'Content-Type': 'text/html'});
+  response.writeHead(500, {'Content-Type': 'text/html;charset:utf-8'});
   response.write('<h2>Server Error</h2><p>Error in api or template config about this domain</p><p>' + (text || 'Can\'t find domain config!') + '</p>');
   response.end();
 }
@@ -31,7 +31,6 @@ function start() {
     
     var nowTemp = host.frondend + (request.url.replace('/', '') || host.baseTemp);
     var httpHead = header(nowTemp);
-
     conf.app = conf.getApp(host.backend);
     
     if(!host) {
@@ -41,7 +40,7 @@ function start() {
 
     // 直接定向到模板
     var defaultTemp = function() {
-      fs.readFile(host.frondend + host.baseTemp, 'binary', function(err, file) {
+      fs.readFile(host.frondend + host.baseTemp, function(err, file) {
         if(err) {
           error(response);
           return;
@@ -65,7 +64,7 @@ function start() {
           if(!exists) {
             defaultTemp();
           } else {
-            fs.readFile(nowTemp, 'binary', function(err, file) {
+            fs.readFile(nowTemp, function(err, file) {
               if (err) {
                 defaultTemp();
               } else {

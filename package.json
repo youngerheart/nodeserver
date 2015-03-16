@@ -1,6 +1,6 @@
 {
   "name": "web-node-server",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Achieve node server's domain name resolution and web application's router",
   "main": "index.js",
   "scripts": {

@@ -5,7 +5,7 @@ function contentType(url) {
   var res = {};
   switch(support.indexOf(url.match(/.[^.]+$/)[0])) {
     case 0:
-      res['Content-Type'] = 'text/html'
+      res['Content-Type'] = 'text/html;charset=utf-8'
       break;
     case 1:
       res['Content-Type'] = 'text/css'
@@ -30,6 +30,9 @@ function contentType(url) {
       break;
     case 10:
       res['Content-Type'] = 'text/xml'
+      break;
+    default:
+      res['Content-Type'] = 'text/html;charset:utf-8'
       break;
   }
   return res;
