@@ -16,10 +16,9 @@ function error(response, text) {
   response.end();
 }
 
-function start() {
-
+function start(config) {
   var host = conf.constant.host;
-
+  if(config) conf.serv = config;
   function onRequest(request, response) {
     var frontUrl = '';
     if(request.url === '/favicon.ico') return;
@@ -32,7 +31,6 @@ function start() {
     var nowTemp = host.frondend + (request.url.replace('/', '') || host.baseTemp);
     var httpHead = header(nowTemp);
     conf.app = conf.getApp(host.backend);
-    
     if(!host) {
       error(response);
       return;
@@ -42,7 +40,7 @@ function start() {
     var defaultTemp = function() {
       fs.readFile(host.frondend + host.baseTemp, function(err, file) {
         if(err) {
-          error(response);
+          error(response, err);
           return;
         }
         responseTemp(response, httpHead, file);

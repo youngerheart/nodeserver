@@ -1,2 +1,1 @@
-var server = require('./nodeserver');
-server.start();
+exports.start = require('./nodeserver').start;
