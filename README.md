@@ -75,8 +75,21 @@ exports.app = {
 3.run
 
 ```php
-// In this directory
-node index.js
+// In root directory
+node web-node-server.js
+
+// In project directory (run this directory only, with local config)
+// you may add web-node-server into you package.json
+config = {
+  'localhost': {
+    backend: __dirname + '/api/',
+    frondend: __dirname + '/web/',
+    baseTemp: 'index.html'
+  }
+}
+var server = require('web-node-server');
+server.start(config);
+
 ```
 
 ## Second、Learn more
