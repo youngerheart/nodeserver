@@ -71,8 +71,26 @@ exports.app = {
     }
   }
 }
+
+var list = {
+  get: function(send, res, routeParams, getParams) {
+    res.status = 200;
+    res.data = {
+      message: 'yes! this is a response data with get method',
+      routeParams: routeParams,
+      getParams: getParams
+    };
+    return send(res); // return application/json
+  },
+  post: function(send, res, routeParams, getParams, formData) {
+    res.status = 200;
+    res.html = '<html></html>';
+    return send(res); // return text/html
+  }
+}
+
 ```
-3.run
+### 3.run
 
 ```php
 // In root directory

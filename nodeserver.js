@@ -53,10 +53,20 @@ function start(config) {
           error(response, 'Route config error!');
           return;
         }
-        // json格式
-        response.writeHead(res.status, {'Content-Type': 'application/json'});
-        response.write(JSON.stringify(res));
-        response.end();
+
+        if(res.html) {
+          // html格式
+          response.writeHead(res.status, {'Content-Type': 'text/html;charset:utf-8'});
+          response.write(res.html);
+          response.end();
+        } else if(res.data) {
+          // json格式
+          response.writeHead(res.status, {'Content-Type': 'application/json'});
+          response.write(JSON.stringify(res));
+          response.end();
+        } else {
+          error(response, 'Data type error!');
+        }
       } else {
         fs.exists(nowTemp, function(exists) {
           if(!exists) {
