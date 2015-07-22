@@ -71,12 +71,48 @@ exports.app = {
     }
   }
 }
+
+var list = {
+  get: function(send, res, routeParams, getParams) {
+    res.status = 200;
+    res.data = {
+      message: 'yes! this is a response data with get method',
+      routeParams: routeParams,
+      getParams: getParams
+    };
+    return send(res); // return application/json
+  },
+  post: function(send, res, routeParams, getParams, formData) {
+    res.status = 200;
+    res.html = '<html></html>';
+    return send(res); // return text/html
+  },
+  delete: function(send, res, routeParams, getParams, formData) {
+    res.status = 302;
+    res.url = '/article';
+    return send(res); // return 302 to a url
+  }
+}
+
 ```
-3.run
+### 3.run
 
 ```php
-// In this directory
-node index.js
+// In root directory
+node web-node-server.js
+
+// In project directory (run this directory only, with local config)
+// you may add web-node-server into you package.json
+config = {
+  'localhost': {
+    backend: __dirname + '/api/',
+    frondend: __dirname + '/web/',
+    baseTemp: 'index.html'
+  }
+}
+var server = require('web-node-server');
+server.start(config);
+
 ```
 
 ## Second、Learn more
