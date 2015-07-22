@@ -86,6 +86,11 @@ var list = {
     res.status = 200;
     res.html = '<html></html>';
     return send(res); // return text/html
+  },
+  delete: function(send, res, routeParams, getParams, formData) {
+    res.status = 302;
+    res.url = '/article';
+    return send(res); // return 302 to a url
   }
 }
 

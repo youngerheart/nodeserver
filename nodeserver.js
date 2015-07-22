@@ -59,11 +59,21 @@ function start(config) {
           response.writeHead(res.status, {'Content-Type': 'text/html;charset:utf-8'});
           response.write(res.html);
           response.end();
+          return;
+          // 重定向
+        } else if(res.status === 302) {
+          response.writeHead(res.status, {
+            'Content-Type': 'text/html;charset:utf-8',
+            'Location': res.url
+          });
+          response.end();
+          return;
         } else if(res.data) {
           // json格式
           response.writeHead(res.status, {'Content-Type': 'application/json'});
           response.write(JSON.stringify(res));
           response.end();
+          return;
         } else {
           error(response, 'Data type error!');
         }
