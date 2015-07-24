@@ -2,8 +2,7 @@ var querystring = require('querystring');
 
 var url = null,
   arg = [], 
-  nowaData = null,
-  res = {status: 404, data: 'api not found'};
+  nowaData = null;
 
 function defaultMethod(arg, url) {
 
@@ -46,8 +45,8 @@ function dealArg(app, url, method, data) {
 
 function response(app, request, send) {
   url = request.url;
-  // 每个方法中的第一个参数为返回数据的调用函数，第一个为需要返回的数据信息
-  arg = [send, res];
+  // 每个方法中的第一个参数为返回数据的调用函数，第二个为需要返回的数据信息
+  arg = [send, {status: 404, data: 'api not found'}];
   nowaData = '';
 
   function dealTask(method) {

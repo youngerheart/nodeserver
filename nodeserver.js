@@ -60,8 +60,8 @@ function start(config) {
           response.write(res.html);
           response.end();
           return;
-          // 重定向
         } else if(res.status === 302) {
+          // 重定向
           response.writeHead(res.status, {
             'Content-Type': 'text/html;charset:utf-8',
             'Location': res.url
