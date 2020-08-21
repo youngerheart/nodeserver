@@ -3,6 +3,7 @@ var fs = require('fs');
 var header = require('./tool/httpHeader').contentType;
 var route = require('./router').response;
 var conf = require('./config');
+var path = require('path');
 
 function responseTemp(response, head, file) {
   response.writeHead(200, head);
@@ -28,7 +29,11 @@ function start(config) {
       }
     }
 
-    var nowTemp = (host.frondend + (request.url.replace('/', '') || host.baseTemp)).replace(/\.\./g, '');
+    var nowTemp = (host.frondend + (request.url.replace('/', '') || host.baseTemp));
+
+    // Sanitize *nowTemp* variable to avoid *Path Traversal* attacks
+  var nowTemp = path.normalize(nowTemp).replace(/^(\.\.(\/|\\|$))+/, '');
+
     var httpHead = header(nowTemp);
     conf.app = conf.getApp(host.backend);
     if(!host) {
