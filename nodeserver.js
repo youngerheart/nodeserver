@@ -32,7 +32,7 @@ function start(config) {
     var nowTemp = (host.frondend + (request.url.replace('/', '') || host.baseTemp));
 
     // Sanitize *nowTemp* variable to avoid *Path Traversal* attacks
-  var nowTemp = path.normalize(nowTemp).replace(/^(\.\.(\/|\\|$))+/, '');
+    var nowTemp = path.normalize(nowTemp).replace(/^(\.\.(\/|\\|$))+/, '');
 
     var httpHead = header(nowTemp);
     conf.app = conf.getApp(host.backend);
