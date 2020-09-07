@@ -27,8 +27,10 @@ function start(config) {
         host = conf.serv[key];
       }
     }
+
+    // Sanitize *nowTemp* variable to avoid *Path Traversal* attacks
+    var nowTemp = (host.frondend + (request.url.replace('/', '') || host.baseTemp)).replace(/(\.\.)/g, '');
     
-    var nowTemp = host.frondend + (request.url.replace('/', '') || host.baseTemp);
     var httpHead = header(nowTemp);
     conf.app = conf.getApp(host.backend);
     if(!host) {
