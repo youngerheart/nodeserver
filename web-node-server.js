@@ -1,1 +1,1 @@
-require('./nodeserver').start();
+require('./src/index').start();

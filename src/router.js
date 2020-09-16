@@ -7,11 +7,12 @@ var url = null,
 function defaultMethod(arg, url) {
   // 解析之后的url参数
   if(url[0]){
-    if(url[0].indexOf('/') === 0) url[0].replace('/', '');
+    if(url[0].indexOf('/') === 0) url[0] = url[0].slice(1);
     arg[2] = url[0].split('/');
   } else {
     arg[2] = null;
   }
+
   // 继续解析带问号的部分,并使用一个对象返回
   if(url[1] && url[1].length) {
     var param = url[1].split('&');
@@ -27,7 +28,6 @@ function defaultMethod(arg, url) {
 }
 
 function dealArg(app, url, method, data) {
-
   for(var key in app.get) {
     if(url.indexOf(key) !== -1) {
       url = url.replace(key, '').split('?');

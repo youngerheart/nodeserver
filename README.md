@@ -4,29 +4,29 @@
 
 Achieve node server's domain name resolution and web application's router
 
-## Zero、What is realized
+## What is realized
 
 1.This is a simple node http server，achieve a mapping for server and domain name，than a mapping for the static file and API route
 
-2.right response for get， post， put， delete method，than submit the params in route query string and form data to your node backend.
+2.right response for get， post， put， delete method，then submit the params in route query string and form data to your node backend.
 
-## First、Setup and run
+## Setup and run
 
-### 0. Global module
+### Global module
 
 make sure you have global installed node.
 
-### 1. Initialization
+### Initialization
 
-```php
-$ sudo npm install -g web-node-server
+```
+$ sudo npm install web-node-server
 ```
 
-### 2. Configure
+### Configure
 
 You should configure server in this directory, specific method is:
 
-```php
+```js
 // configure server constant
 // config.js
 exports.constant = {
@@ -34,8 +34,8 @@ exports.constant = {
   port: 9999,
   // welcome page's configure
   host: {
-    backend: __dirname + '/default/',
-    frondend: __dirname + '/default/',
+    backend: path.join(__dirname, '/../default/'),
+    frondend: path.join(__dirname, '/../default/'),
     baseTemp: 'welcome.html'
   }
 };
@@ -53,9 +53,9 @@ exports.serv = {
 };
 ```
 
-At backend workspace (Ppreviously defined workspace) create config.js. Write the site routing information
+At backend workspace (previously defined workspace) create config.js. Write the site routing information
 
-```php
+```js
 // project_url/config.js
 // Define a API's url，all get method's API are in app.url.get object，the key is route url，value is a function which will be running. Than define post, put, delete route.
 exports.app = {
@@ -98,9 +98,9 @@ var list = {
 }
 
 ```
-### 3.run
+### run
 
-```php
+```js
 // In root directory
 node web-node-server.js
 
@@ -118,17 +118,17 @@ server.start(config);
 
 ```
 
-## Second、Learn more
+## Learn more
 
 There are some example in welcome page about get， post， put， delete method's using. You can reference
 
 you can give me your suggestion in github.
 
-## Third、The basic file directory structure
+## The basic file directory structure
 
 If any changes please update this section
 
-```php
+```js
 .
 ├── config.js           ... server's domain example configure
 ├── index.js            ... example startup code

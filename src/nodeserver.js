@@ -20,8 +20,7 @@ function start(config) {
   var host = conf.constant.host;
   if(config) conf.serv = config;
   function onRequest(request, response) {
-    var frontUrl = '';
-    if(request.url === '/favicon.ico') return;
+    // if(request.url === '/favicon.ico') return;
     for(var key in conf.serv) {
       if(request.headers.host.indexOf(key) !== -1) {
         host = conf.serv[key];
@@ -82,6 +81,10 @@ function start(config) {
       } else {
         fs.exists(nowTemp, function(exists) {
           if(!exists) {
+            if(request.url === '/favicon.ico') {
+              response.writeHead(404);
+              return response.end();
+            }
             defaultTemp();
           } else {
             fs.readFile(nowTemp, function(err, file) {
