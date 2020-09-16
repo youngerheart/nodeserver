@@ -1,4 +1,7 @@
 # nodeserver
+
+<a href="https://www.npmjs.com/package/web-node-server"><img src="https://img.shields.io/npm/v/web-node-server.svg?sanitize=true" alt="Version"></a>
+
 Achieve node server's domain name resolution and web application's router
 
 ## Zero、What is realized
